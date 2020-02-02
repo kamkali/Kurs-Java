@@ -18,4 +18,12 @@ public class Rectangle implements Figure {
     public double getArea() {
         return a*b;
     }
+
+    @Override
+    public String toString() {
+        return "Rectangle{" +
+                "a=" + a +
+                ", b=" + b +
+                '}';
+    }
 }

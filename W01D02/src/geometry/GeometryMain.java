@@ -13,6 +13,7 @@ public class GeometryMain {
 
         Circle circle = new Circle(radius);
 
+
         System.out.println("Please input a and b");
 
         double a = scanner.nextDouble();
@@ -27,9 +28,11 @@ public class GeometryMain {
 
         System.out.println();
 
-        System.out.println("Area of a rectangle is: " + rec.getArea());
-        System.out.println("Area of a circle is: " + circle.getArea());
-
+        for (Figure figure : figureList) {
+            System.out.println(
+                    figure.toString() + " Area: " + figure.getArea() + " Perimeter: " + figure.getPerimeter()
+            );
+        }
 
     }
 }
