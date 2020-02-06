@@ -1,12 +1,38 @@
 package files;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Scanner;
 
-public class FIleTheory {
+public class FileTheory {
     public static void main(String[] args) throws IOException {
 
         getIfnoAboutNewFile();
+        ex7();
+    }
+
+    private static void ex7(){
+        System.out.println("Podaj sciezke do pliku: ");
+        System.out.println("~$ ");
+        String path;
+        Scanner scanner = new Scanner(System.in);
+        path = scanner.nextLine();
+
+        try(FileOutputStream file = new FileOutputStream(path)) {
+            do {
+                System.out.println("Podaj linie do wpisania do pliku: ");
+                System.out.println("~$ ");
+
+                byte[] byteArr = scanner.nextLine().getBytes();
+                file.write(byteArr);
+                file.write("\n".getBytes());
+
+            } while (!scanner.nextLine().equals("-"));
+        } catch (NullPointerException | IOException e){
+            System.out.println("Nie udalo sie!");
+        }
+
     }
 
 
