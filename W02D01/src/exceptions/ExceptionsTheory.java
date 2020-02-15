@@ -29,9 +29,13 @@ public class ExceptionsTheory {
                 result = Math.sqrt(val);
                 success = true;
 
-            } catch(IllegalArgumentException e){
+            }catch (NumberFormatException e){
+                System.out.println("NumberFormatException " + e.getMessage());
+            }
+            catch(IllegalArgumentException e){
                 System.out.println("IllegalArgumentException " + e.getMessage());
-            } catch(InputMismatchException e){
+            }
+            catch(InputMismatchException e){
                 System.out.println("InputMismatchException " + e.getMessage());
             }
         } while (!success);
