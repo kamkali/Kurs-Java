@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -16,7 +17,62 @@ public class FileHistogram {
 
         saveHistogramToFile(histogram, "savedHistogram.txt");
 
+        reverseText(loadedText, "wspak.txt");
 
+        replaceMostCommon(loadedText, histogram, "replaced.txt");
+
+    }
+
+    private static void replaceMostCommon(String loadedText, Map<Character, Integer> histogram, String fileName) {
+        int prevVal = 0;
+        char prevKey = '0';
+        int maxVal = 0;
+        char maxKey = '0';
+
+        for(Map.Entry<Character,Integer> entry: histogram.entrySet()){
+            if(maxVal < entry.getValue()){
+                maxVal = entry.getValue();
+                maxKey = entry.getKey();
+            }
+        }
+        for(Map.Entry<Character,Integer> entry: histogram.entrySet()){
+            if(prevVal < entry.getValue() && entry.getKey() != maxKey){
+                prevVal = entry.getValue();
+                prevKey = entry.getKey();
+            }
+        }
+
+        char[] charArray = loadedText.toCharArray();
+
+        for (int i = 0; i < charArray.length; i++) {
+            if (charArray[i] == maxKey){
+                charArray[i] = prevKey;
+            } else if (charArray[i] == prevKey){
+                charArray[i] = maxKey;
+            }
+        }
+
+        try(FileWriter file = new FileWriter(fileName)) {
+
+            for (char c: charArray) {
+                file.write(c);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    private static void reverseText(String loadedText, String fileName) {
+        try(FileWriter file = new FileWriter(fileName)) {
+
+            for (int i = loadedText.length() - 1; i >= 0 ; i--) {
+                file.write(loadedText.charAt(i));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void saveHistogramToFile(Map<Character, Integer> histogram, String fileName) {

@@ -1,1 +1,4 @@
-aaa  bbbb   cc
+Przykladowy tekst.
+Druga linia
+
+Czwarta liniia
