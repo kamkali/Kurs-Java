@@ -8,9 +8,14 @@ import java.util.Scanner;
 public class FileTheory {
     public static void main(String[] args) throws IOException {
 
-        getIfnoAboutNewFile();
-        ex7();
-        ex8();
+//        getIfnoAboutNewFile();
+//        ex7();
+//        ex8();
+        fileEx1();
+    }
+
+    private static void fileEx1() {
+
     }
 
     private static void ex8() {
