@@ -1,7 +1,6 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -15,15 +14,15 @@ public class FileHistogram {
 
         Map<Character,Integer> histogram = makeHistogram(loadedText);
 
-        saveHistogramToFile(histogram, "savedHistogram.txt");
+        saveHistogramToFile(histogram);
 
-        reverseText(loadedText, "wspak.txt");
+        reverseText(loadedText);
 
-        replaceMostCommon(loadedText, histogram, "replaced.txt");
+        replaceMostCommon(loadedText, histogram);
 
     }
 
-    private static void replaceMostCommon(String loadedText, Map<Character, Integer> histogram, String fileName) {
+    private static void replaceMostCommon(String loadedText, Map<Character, Integer> histogram) {
         int prevVal = 0;
         char prevKey = '0';
         int maxVal = 0;
@@ -52,7 +51,7 @@ public class FileHistogram {
             }
         }
 
-        try(FileWriter file = new FileWriter(fileName)) {
+        try(FileWriter file = new FileWriter("replaced.txt")) {
 
             for (char c: charArray) {
                 file.write(c);
@@ -64,8 +63,8 @@ public class FileHistogram {
 
 
 
-    private static void reverseText(String loadedText, String fileName) {
-        try(FileWriter file = new FileWriter(fileName)) {
+    private static void reverseText(String loadedText) {
+        try(FileWriter file = new FileWriter("wspak.txt")) {
 
             for (int i = loadedText.length() - 1; i >= 0 ; i--) {
                 file.write(loadedText.charAt(i));
@@ -75,8 +74,8 @@ public class FileHistogram {
         }
     }
 
-    private static void saveHistogramToFile(Map<Character, Integer> histogram, String fileName) {
-        try(FileWriter file = new FileWriter(fileName)) {
+    private static void saveHistogramToFile(Map<Character, Integer> histogram) {
+        try(FileWriter file = new FileWriter("savedHistogram.txt")) {
             for (Map.Entry<Character,Integer> entry: histogram.entrySet()){
                 file.write(entry.getKey() + " : " + entry.getValue() + "\n");
             }
