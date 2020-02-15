@@ -22,5 +22,11 @@ public class GenericTypesTheory {
         System.out.println(intArr.getSize());
         System.out.println(intArr.at(0));
 
+        ImArray<String> strArr = new ImArray<>(new String[]{"a", "b", "c", "d"});
+
+        for (int i = 0; i < strArr.getSize(); i++) {
+            System.out.println(strArr.at(i));
+        }
+
     }
 }
