@@ -14,9 +14,13 @@ public class FileHistogram {
 
         Map<Character,Integer> histogram = makeHistogram(loadedText);
 
-        System.out.println(histogram);
+        saveHistogramToFile(histogram, "savedHistogram.txt");
 
-        try(FileWriter file = new FileWriter("savedHistogram.txt")) {
+
+    }
+
+    private static void saveHistogramToFile(Map<Character, Integer> histogram, String fileName) {
+        try(FileWriter file = new FileWriter(fileName)) {
             for (Map.Entry<Character,Integer> entry: histogram.entrySet()){
                 file.write(entry.getKey() + " : " + entry.getValue() + "\n");
             }
