@@ -1,7 +1,9 @@
 package generics;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Stack;
 
 public class Wildcards {
 
@@ -16,6 +18,11 @@ public class Wildcards {
             strList.add("a" + i);
         }
 
+        List<Double> doubleList = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            doubleList.add(i + 0.5);
+        }
+
 //        zad3_1(intList);
 //        zad3_1(strList);
 
@@ -24,13 +31,15 @@ public class Wildcards {
 //        zad3_2(intList);
 //        zad3_2(strList);
 
-        List<?> resultList = zad4(intList, intList);
+        List<?> resultList = zad4(intList, doubleList);
 
         for (int i = 0; i < resultList.size(); i++) {
             System.out.println(resultList.get(i));
         }
 
+        System.out.println(resultList.getClass().getName());
 
+        List<String> s = new ArrayList<>(Arrays.asList("a", "b"));
     }
 
     private static List<? extends Number> zad4(List<? extends Number> lista1, List<? extends Number> lista2) {
