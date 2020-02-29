@@ -1,4 +1,4 @@
-package factory.builder;
+package builder;
 
 public class KebabNested {
     public enum Meat {

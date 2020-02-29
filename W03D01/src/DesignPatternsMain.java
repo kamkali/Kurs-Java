@@ -1,7 +1,7 @@
-import factory.builder.Builder;
-import factory.builder.Kebab;
-import factory.builder.KebabBuilder;
-import factory.builder.KebabNested;
+import builder.Builder;
+import builder.Kebab;
+import builder.KebabBuilder;
+import builder.KebabNested;
 import factory.exercise.Flower;
 import factory.exercise.FlowerFactory;
 import factory.exercise.FlowerType;
