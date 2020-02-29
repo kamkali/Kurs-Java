@@ -1,4 +1,4 @@
-package adapter;
+package adapter.theory;
 
 public class Ferrari implements Parameters {
 

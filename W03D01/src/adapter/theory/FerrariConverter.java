@@ -1,4 +1,4 @@
-package adapter;
+package adapter.theory;
 
 public class FerrariConverter implements ParametersConverted{
     private Parameters data;

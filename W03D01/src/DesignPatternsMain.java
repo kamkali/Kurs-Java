@@ -1,3 +1,7 @@
+import adapter.exercise.Deska;
+import adapter.exercise.DeskaAdapter;
+import adapter.exercise.Drewno;
+import adapter.exercise.DrewnoConverter;
 import builder.Builder;
 import builder.Kebab;
 import builder.KebabBuilder;
@@ -13,7 +17,16 @@ public class DesignPatternsMain {
 //        factoryExample();
 //        nestedBuilderExample();
 //        builderExample();
+        adapterExample();
+    }
 
+    private static void adapterExample() {
+        Drewno deska = new Deska(100, 20);
+
+        DrewnoConverter deskaConv = new DeskaAdapter(deska);
+
+        System.out.println(deska.getLength() + ", " + deska.getMass());
+        System.out.println(deskaConv.getLength() + ", " + deskaConv.getMass());
     }
 
     private static void builderExample() {

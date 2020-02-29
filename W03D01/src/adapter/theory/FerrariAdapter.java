@@ -1,4 +1,4 @@
-package adapter;
+package adapter.theory;
 
 public class FerrariAdapter {
     // potrzeba nam zwrocic wartosc w km/h
