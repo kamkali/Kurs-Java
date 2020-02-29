@@ -6,6 +6,7 @@ import builder.Builder;
 import builder.Kebab;
 import builder.KebabBuilder;
 import builder.KebabNested;
+import decorator.*;
 import factory.exercise.Flower;
 import factory.exercise.FlowerFactory;
 import factory.exercise.FlowerType;
@@ -17,7 +18,21 @@ public class DesignPatternsMain {
 //        factoryExample();
 //        nestedBuilderExample();
 //        builderExample();
-        adapterExample();
+//        adapterExample();
+        decoratorExample();
+    }
+
+    private static void decoratorExample() {
+        Car basic = new BasicCar();
+        basic.assembly();
+        System.out.println();
+
+        Car sports = new SportsCar(basic);
+        sports.assembly();
+        System.out.println();
+
+        Car truck = new TruckCar(basic);
+        truck.assembly();
     }
 
     private static void adapterExample() {
