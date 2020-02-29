@@ -1,4 +1,4 @@
-package factory;
+package factory.theory;
 
 public class Ford implements Car {
     @Override
