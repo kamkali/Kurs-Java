@@ -1,4 +1,4 @@
-package decorator;
+package decorator.theory;
 
 public abstract class CarDecorator implements Car {
     protected Car car;

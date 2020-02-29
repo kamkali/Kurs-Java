@@ -6,7 +6,11 @@ import builder.Builder;
 import builder.Kebab;
 import builder.KebabBuilder;
 import builder.KebabNested;
-import decorator.*;
+import decorator.exercise.*;
+import decorator.theory.BasicCar;
+import decorator.theory.Car;
+import decorator.theory.SportsCar;
+import decorator.theory.TruckCar;
 import factory.exercise.Flower;
 import factory.exercise.FlowerFactory;
 import factory.exercise.FlowerType;
@@ -19,7 +23,17 @@ public class DesignPatternsMain {
 //        nestedBuilderExample();
 //        builderExample();
 //        adapterExample();
-        decoratorExample();
+//        decoratorExample();
+        decoratorExercise();
+    }
+
+    private static void decoratorExercise() {
+        XmasTree nakedTree = new XmasTreeImpl();
+
+        XmasTree decoratedTree = new XmasBulbs(
+                new XmasChains(
+                        new XmasLights(nakedTree)));
+        decoratedTree.decorate();
     }
 
     private static void decoratorExample() {

@@ -1,4 +1,4 @@
-package decorator;
+package decorator.theory;
 
 public class BasicCar implements Car {
 
