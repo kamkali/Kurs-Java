@@ -1,5 +1,7 @@
-import factory.builder.Hall;
+import factory.builder.Builder;
 import factory.builder.Kebab;
+import factory.builder.KebabBuilder;
+import factory.builder.KebabNested;
 import factory.exercise.Flower;
 import factory.exercise.FlowerFactory;
 import factory.exercise.FlowerType;
@@ -9,26 +11,39 @@ public class DesignPatternsMain {
     public static void main(String[] args) {
 //        singletonExample();
 //        factoryExample();
-        builderExample();
+//        nestedBuilderExample();
+//        builderExample();
+
     }
 
     private static void builderExample() {
-        Kebab kebab1 = new Kebab.Builder()
-                .setBun(Kebab.Bun.TORTILLA)
-                .setMeat(Kebab.Meat.CHICKEN)
-                .setSauce(Kebab.Sauce.MIXED)
+        KebabBuilder builder = new KebabBuilder();
+
+        builder.setBun(Builder.Bun.BREAD_BUN);
+        builder.setMeat(Builder.Meat.CHICKEN);
+        builder.setTopping(Builder.Toppings.TOMATO);
+
+        Kebab kebab = builder.build();
+        System.out.println(kebab);
+    }
+
+    private static void nestedBuilderExample() {
+        KebabNested kebabNested1 = new KebabNested.Builder()
+                .setBun(KebabNested.Bun.TORTILLA)
+                .setMeat(KebabNested.Meat.CHICKEN)
+                .setSauce(KebabNested.Sauce.MIXED)
                 .build();
 
-        Kebab kebab2 = new Kebab.Builder()
-                .setBun(Kebab.Bun.BREAD_BUN)
-                .setMeat(Kebab.Meat.BEEF)
+        KebabNested kebabNested2 = new KebabNested.Builder()
+                .setBun(KebabNested.Bun.BREAD_BUN)
+                .setMeat(KebabNested.Meat.BEEF)
                 .setLettuce()
                 .setOnion()
-                .setSauce(Kebab.Sauce.GARLIC)
+                .setSauce(KebabNested.Sauce.GARLIC)
                 .build();
 
-        System.out.println(kebab1);
-        System.out.println(kebab2);
+        System.out.println(kebabNested1);
+        System.out.println(kebabNested2);
     }
 
     private static void factoryExample() {
