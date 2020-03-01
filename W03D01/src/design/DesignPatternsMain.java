@@ -13,6 +13,7 @@ import design.decorator.theory.BasicCar;
 import design.decorator.theory.Car;
 import design.decorator.theory.SportsCar;
 import design.decorator.theory.TruckCar;
+import design.facade.exercise.ComputerFacade;
 import design.factory.exercise.Flower;
 import design.factory.exercise.FlowerFactory;
 import design.factory.exercise.FlowerType;
@@ -23,10 +24,17 @@ public class DesignPatternsMain {
         singletonExample();
         factoryExample();
         nestedBuilderExample();
-        builderExample();
+        builderExample()
         adapterExample();
         decoratorExample();
         decoratorExercise();
+        facadeExersice();
+    }
+
+    private static void facadeExersice() {
+        ComputerFacade computer = new ComputerFacade();
+        boolean isComputerOn = computer.turnOn();
+        System.out.println(isComputerOn);
     }
 
     private static void decoratorExercise() {
