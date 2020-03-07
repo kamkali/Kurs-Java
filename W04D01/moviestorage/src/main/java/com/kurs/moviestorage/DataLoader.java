@@ -7,6 +7,8 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+
 
 @Component
 public class DataLoader implements ApplicationRunner {
@@ -20,8 +22,11 @@ public class DataLoader implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        movieRepository.save(new Movie("LOTR"));
-        movieRepository.save(new Movie("Harry Potter"));
-        movieRepository.save(new Movie("Gwiezdne Wojny"));
+        LocalDate LOTRDate = LocalDate.of(2000, 5, 30);
+        LocalDate HPDate = LocalDate.of(2005, 3, 12);
+
+        movieRepository.save(new Movie("Adventure", LOTRDate, "LOTR"));
+        movieRepository.save(new Movie("Fantasy", HPDate, "Harry Potter"));
+        movieRepository.save(new Movie("Action", LocalDate.of(2003, 12, 15), "Matrix"));
     }
 }

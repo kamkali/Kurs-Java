@@ -1,12 +1,14 @@
 package com.kurs.moviestorage.controller;
 
 import com.kurs.moviestorage.dao.MovieRepository;
+import com.kurs.moviestorage.dto.MovieCreationDto;
 import com.kurs.moviestorage.model.Movie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -22,11 +24,10 @@ public class MovieController {
     }
 
     @PostMapping("/movies")
-    public ResponseEntity<Movie> postMovie(@RequestBody String title){
-        Movie movieToSave = new Movie(title);
+    public ResponseEntity<Movie> postMovie(@RequestBody MovieCreationDto movie){
 
-        Movie savedMovie = movieRepository.save(movieToSave);
-        movieToSave.setId(savedMovie.getId());
+        Movie movieToSave = new Movie(movie.getGenere(), LocalDate.parse(movie.getDate()), movie.getTitle());
+        movieRepository.save(movieToSave);
 
         return ResponseEntity.status(HttpStatus.OK).body(movieToSave);
     }
@@ -38,4 +39,5 @@ public class MovieController {
         else
             return movieRepository.findAll();
     }
+
 }
