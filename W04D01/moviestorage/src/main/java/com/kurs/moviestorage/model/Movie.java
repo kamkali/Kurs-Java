@@ -3,6 +3,7 @@ package com.kurs.moviestorage.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import java.time.LocalDate;
 
 @Entity
@@ -12,25 +13,26 @@ public class Movie {
     @GeneratedValue
     private Long id;
 
-    private String genere;
+    @OneToOne
+    private Genre genre;
     private LocalDate productionDate;
     private String title;
 
     public Movie() {
     }
 
-    public Movie(String genere, LocalDate productionDate, String title) {
-        this.genere = genere;
+    public Movie(Genre genre, LocalDate productionDate, String title) {
+        this.genre = genre;
         this.productionDate = productionDate;
         this.title = title;
     }
 
-    public String getGenere() {
-        return genere;
+    public Genre getGenre() {
+        return genre;
     }
 
-    public void setGenere(String genere) {
-        this.genere = genere;
+    public void setGenre(Genre genre) {
+        this.genre = genre;
     }
 
     public LocalDate getProductionDate() {

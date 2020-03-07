@@ -1,26 +1,28 @@
 package com.kurs.moviestorage.dto;
 
 
+import com.kurs.moviestorage.model.Genre;
+
 public class MovieCreationDto {
-    private String genere;
+    private Genre genre;
     private String date;
     private String title;
 
     public MovieCreationDto() {
     }
 
-    public MovieCreationDto(String genere, String date, String title) {
-        this.genere = genere;
+    public MovieCreationDto(Genre genre, String date, String title) {
+        this.genre = genre;
         this.date = date;
         this.title = title;
     }
 
-    public String getGenere() {
-        return genere;
+    public Genre getGenre() {
+        return genre;
     }
 
-    public void setGenere(String genere) {
-        this.genere = genere;
+    public void setGenre(Genre genre) {
+        this.genre = genre;
     }
 
     public String getDate() {
