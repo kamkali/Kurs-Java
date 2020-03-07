@@ -29,7 +29,7 @@ public class MovieController {
     @PostMapping("/movies")
     public ResponseEntity<Movie> postMovie(@RequestBody MovieCreationDto movie) throws Exception {
         Movie movieToSave;
-        Optional<Genre> genre = genreRepository.findById(movie.getGenre().getId());
+        Optional<Genre> genre = genreRepository.findById(movie.getGenre());
 
         if (genre.isPresent()){
             movieToSave = new Movie(genre.get(), LocalDate.parse(movie.getDate()), movie.getTitle());

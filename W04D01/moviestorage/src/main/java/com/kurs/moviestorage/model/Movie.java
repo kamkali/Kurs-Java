@@ -1,9 +1,6 @@
 package com.kurs.moviestorage.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -13,8 +10,10 @@ public class Movie {
     @GeneratedValue
     private Long id;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "genre_id")
     private Genre genre;
+
     private LocalDate productionDate;
     private String title;
 
