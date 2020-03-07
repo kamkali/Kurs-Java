@@ -28,17 +28,18 @@ public class DataLoader implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        LocalDate LOTRDate = LocalDate.of(2000, 5, 30);
-        LocalDate HPDate = LocalDate.of(2005, 3, 12);
-
         Genre adventureGenre = new Genre("Adventure", "Description1", "Characteristics1");
         Genre fantasyGenre = new Genre("Fantasy", "Desc2", "Char2");
         Genre actionGenre = new Genre("Action", "Desc3", "Char3");
         genreRepository.saveAll(Arrays.asList(actionGenre, adventureGenre, fantasyGenre));
 
+        LocalDate LOTRDate = LocalDate.of(2000, 5, 30);
+        LocalDate HPDate = LocalDate.of(2005, 3, 12);
 
-        movieRepository.save(new Movie(adventureGenre, LOTRDate, "LOTR"));
-        movieRepository.save(new Movie(fantasyGenre, HPDate, "Harry Potter"));
-        movieRepository.save(new Movie(actionGenre, LocalDate.of(2003, 12, 15), "Matrix"));
+        movieRepository.saveAll(Arrays.asList(
+                new Movie(adventureGenre, LOTRDate, "LOTR"),
+                new Movie(fantasyGenre, HPDate, "Harry Potter"),
+                new Movie(actionGenre, LocalDate.of(2003, 12, 15), "Matrix")
+        ));
     }
 }

@@ -37,7 +37,6 @@ public class MovieController {
         } else
             throw new Exception("No given genre found");
 
-
         return ResponseEntity.status(HttpStatus.OK).body(movieToSave);
     }
 
