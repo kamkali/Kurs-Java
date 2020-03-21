@@ -1,21 +1,20 @@
 package com.course.task.flights.models.response.tourist;
 
 import com.course.task.flights.models.response.Response;
-import com.course.task.flights.tourist.TouristEntity;
 
 public class TouristEditionResponseDto extends Response {
-    private TouristEntity touristEntity;
+    private TouristBodyResponseDto touristEntity;
 
-    public TouristEditionResponseDto(MessageType type, String message, TouristEntity touristEntity) {
+    public TouristEditionResponseDto(MessageType type, String message, TouristBodyResponseDto touristEntity) {
         super(type, message);
         this.touristEntity = touristEntity;
     }
 
-    public TouristEntity getTouristEntity() {
+    public TouristBodyResponseDto getTouristEntity() {
         return touristEntity;
     }
 
-    public void setTouristEntity(TouristEntity touristEntity) {
+    public void setTouristEntity(TouristBodyResponseDto touristEntity) {
         this.touristEntity = touristEntity;
     }
 }

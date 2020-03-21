@@ -1,17 +1,20 @@
 package com.course.task.flights.models.response.flight;
 
-import com.course.task.flights.flight.FlightEntity;
 import com.course.task.flights.models.response.Response;
 
 public class FlightCreationResponseDto extends Response {
-    private FlightEntity flightEntity;
+    private FlightBodyResponseDto flightEntity;
 
-    public FlightCreationResponseDto(MessageType type, String message, FlightEntity flightEntity) {
+    public FlightCreationResponseDto(MessageType type, String message, FlightBodyResponseDto flightEntity) {
         super(type, message);
         this.flightEntity = flightEntity;
     }
 
-    public FlightEntity getFlightEntity() {
+    public FlightCreationResponseDto(MessageType type, String message) {
+        super(type, message);
+    }
+
+    public FlightBodyResponseDto getFlightEntity() {
         return flightEntity;
     }
 }

@@ -1,14 +1,15 @@
 package com.course.task.flights.models.response.tourist;
 
 import com.course.task.flights.models.response.Response;
-import com.course.task.flights.tourist.TouristEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 public class TouristListResponseDto extends Response {
-    private List<TouristEntity> tourist;
+    private List<TouristBodyResponseDto> tourist;
 
-    public TouristListResponseDto(MessageType type, String message, List<TouristEntity> tourist) {
+    @Autowired
+    public TouristListResponseDto(MessageType type, String message, List<TouristBodyResponseDto> tourist) {
         super(type, message);
         this.tourist = tourist;
     }
@@ -17,11 +18,11 @@ public class TouristListResponseDto extends Response {
         super(type, message);
     }
 
-    public List<TouristEntity> getTourist() {
+    public List<TouristBodyResponseDto> getTourist() {
         return tourist;
     }
 
-    public void setTourist(List<TouristEntity> tourist) {
+    public void setTourist(List<TouristBodyResponseDto> tourist) {
         this.tourist = tourist;
     }
 }

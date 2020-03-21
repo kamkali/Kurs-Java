@@ -1,39 +1,25 @@
-package com.course.task.flights.tourist;
+package com.course.task.flights.models.response.tourist;
 
-import com.course.task.flights.flight.FlightEntity;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import java.time.LocalDate;
-import java.util.List;
 
-@Entity
-public class TouristEntity {
-
-    @Id
-    @GeneratedValue
+public class TouristEntityResponseDto {
     private Long id;
-
     private String firstName;
     private String lastName;
     private String sex;
     private String country;
     private LocalDate birthDate;
-    @ManyToMany
-    private List<FlightEntity> flightList;
 
-    public TouristEntity() {
-    }
-
-    public TouristEntity(String firstName, String lastName, String sex, String country, LocalDate birthDate, List<FlightEntity> flightList) {
+    public TouristEntityResponseDto(Long id, String firstName, String lastName, String sex, String country, LocalDate birthDate) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.sex = sex;
         this.country = country;
         this.birthDate = birthDate;
-        this.flightList = flightList;
+    }
+
+    public TouristEntityResponseDto() {
     }
 
     public Long getId() {
@@ -82,13 +68,5 @@ public class TouristEntity {
 
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
-    }
-
-    public List<FlightEntity> getFlightList() {
-        return flightList;
-    }
-
-    public void setFlightList(List<FlightEntity> flightList) {
-        this.flightList = flightList;
     }
 }

@@ -1,19 +1,20 @@
 package com.course.task.flights.models.response.flight;
 
-import com.course.task.flights.flight.FlightEntity;
 import com.course.task.flights.models.response.Response;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 public class FlightListResponseDto extends Response {
-    List<FlightEntity> flightList;
+    List<FlightBodyResponseDto> flightList;
 
-    public FlightListResponseDto(MessageType type, String message, List<FlightEntity> flightList) {
+    @Autowired
+    public FlightListResponseDto(MessageType type, String message, List<FlightBodyResponseDto> flightList) {
         super(type, message);
         this.flightList = flightList;
     }
 
-    public List<FlightEntity> getFlightList() {
+    public List<FlightBodyResponseDto> getFlightList() {
         return flightList;
     }
 }

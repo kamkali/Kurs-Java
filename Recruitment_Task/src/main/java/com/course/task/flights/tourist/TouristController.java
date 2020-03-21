@@ -37,24 +37,32 @@ public class TouristController {
         TouristEntity savedTourist = touristRepository.save(touristToSave);
         touristToSave.setId(savedTourist.getId());
 
+        TouristBodyResponseDto bodyResponse = new TouristBodyResponseDto(touristToSave);
+
         return ResponseEntity.status(HttpStatus.CREATED).body(new TouristCreationResponseDto(
-                Response.MessageType.INFO, "Tourist has been created successfully", touristToSave));
+                Response.MessageType.INFO, "Tourist has been created successfully", bodyResponse));
     }
 
     @GetMapping("/all")
     public ResponseEntity getTouristsList() {
         List<TouristEntity> touristList = touristRepository.findAll();
 
+        List<TouristBodyResponseDto> bodyToReturn = new ArrayList<>();
+        for (int i = 0; i < touristList.size(); i++) {
+            bodyToReturn.add(i, new TouristBodyResponseDto(touristList.get(i)));
+        }
+
         return ResponseEntity.status(HttpStatus.OK).body(new TouristListResponseDto(Response.MessageType.INFO,
-                "Current list of users", touristList));
+                "Current list of users", bodyToReturn));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity getTourist(@PathVariable Long id) throws NotFoundException {
         TouristEntity tourist = checkTouristCorrectness(id);
 
+        TouristBodyResponseDto bodyResponse = new TouristBodyResponseDto(tourist);
         return ResponseEntity.status(HttpStatus.OK).body(new SingleTouristResponseDto(Response.MessageType.INFO,
-                "User with given id found", tourist));
+                "User with given id found", bodyResponse));
     }
 
     @PutMapping("/{id}" + "/flight/add")
@@ -72,8 +80,10 @@ public class TouristController {
         touristRepository.save(tourist);
         flightRepository.save(flight);
 
+        TouristBodyResponseDto bodyResponse = new TouristBodyResponseDto(tourist);
+
         return ResponseEntity.status(HttpStatus.OK).body(new TouristEditionResponseDto(Response.MessageType.INFO,
-                "Tourist has been edited", tourist));
+                "Tourist has been edited", bodyResponse));
     }
 
     @PutMapping("/{id}" + "/flight/remove")
@@ -85,8 +95,10 @@ public class TouristController {
 
         touristRepository.save(tourist);
 
+        TouristBodyResponseDto bodyResponse = new TouristBodyResponseDto(tourist);
+
         return ResponseEntity.status(HttpStatus.OK).body(new TouristEditionResponseDto(Response.MessageType.INFO,
-                "Tourist has been edited", tourist));
+                "Tourist has been edited", bodyResponse));
     }
 
     @DeleteMapping("/{id}")

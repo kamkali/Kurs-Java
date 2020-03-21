@@ -1,36 +1,23 @@
-package com.course.task.flights.flight;
+package com.course.task.flights.models.response.flight;
 
-import com.course.task.flights.tourist.TouristEntity;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import java.time.LocalDateTime;
-import java.util.List;
 
-@Entity
-public class FlightEntity {
-    @Id
-    @GeneratedValue
+public class FlightEntityResponseDto {
     private Long id;
-
     private LocalDateTime departureDateTime;
     private LocalDateTime arrivalDateTime;
     private int seatCapacity;
     private double ticketPrice;
-    @ManyToMany
-    private List<TouristEntity> touristList;
 
-    public FlightEntity() {
-    }
-
-    public FlightEntity(LocalDateTime departureDateTime, LocalDateTime arrivalDateTime, int seatCapacity, double ticketPrice, List<TouristEntity> touristList) {
+    public FlightEntityResponseDto(Long id, LocalDateTime departureDateTime, LocalDateTime arrivalDateTime, int seatCapacity, double ticketPrice) {
+        this.id = id;
         this.departureDateTime = departureDateTime;
         this.arrivalDateTime = arrivalDateTime;
         this.seatCapacity = seatCapacity;
         this.ticketPrice = ticketPrice;
-        this.touristList = touristList;
+    }
+
+    public FlightEntityResponseDto() {
     }
 
     public Long getId() {
@@ -71,13 +58,5 @@ public class FlightEntity {
 
     public void setTicketPrice(double ticketPrice) {
         this.ticketPrice = ticketPrice;
-    }
-
-    public List<TouristEntity> getTouristList() {
-        return touristList;
-    }
-
-    public void setTouristList(List<TouristEntity> touristList) {
-        this.touristList = touristList;
     }
 }
