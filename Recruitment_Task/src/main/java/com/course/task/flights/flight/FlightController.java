@@ -3,7 +3,9 @@ package com.course.task.flights.flight;
 import com.course.task.flights.models.request.flight.FlightCreationSchemaDto;
 import com.course.task.flights.models.response.Response;
 import com.course.task.flights.models.response.flight.FlightCreationResponseDto;
+import com.course.task.flights.models.response.flight.FlightDeletionDto;
 import com.course.task.flights.models.response.flight.FlightListResponseDto;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/flights")
@@ -40,5 +43,25 @@ public class FlightController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(new FlightCreationResponseDto(Response.MessageType.INFO,
                 "New flight record has been created", flightToSave));
+    }
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteFlight(@PathVariable Long id) throws NotFoundException {
+        FlightEntity flight = checkFlightCorrectness(id);
+
+        flightRepository.delete(flight);
+
+        return ResponseEntity.status(HttpStatus.OK).body(new FlightDeletionDto(Response.MessageType.INFO,
+                "Flight resurce has been deleted", flight));
+    }
+
+    private FlightEntity checkFlightCorrectness(Long flightId) throws NotFoundException {
+        Optional<FlightEntity> flight = flightRepository.findById(flightId);
+
+        if (!flight.isPresent())
+            throw new NotFoundException("Flight has not been found");
+
+        return flight.get();
     }
 }
