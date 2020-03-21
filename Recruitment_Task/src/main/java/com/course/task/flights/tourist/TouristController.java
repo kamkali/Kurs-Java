@@ -5,10 +5,7 @@ import com.course.task.flights.flight.FlightRepository;
 import com.course.task.flights.models.request.tourist.TouristCreationDto;
 import com.course.task.flights.models.request.tourist.TouristEditionDto;
 import com.course.task.flights.models.response.Response;
-import com.course.task.flights.models.response.tourist.TouristCreationResponseDto;
-import com.course.task.flights.models.response.tourist.TouristDeletionResponseDto;
-import com.course.task.flights.models.response.tourist.TouristEditionResponseDto;
-import com.course.task.flights.models.response.tourist.TouristListResponseDto;
+import com.course.task.flights.models.response.tourist.*;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -51,18 +48,27 @@ public class TouristController {
                 "Current list of users", touristList));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity getTourist(@PathVariable Long id) throws NotFoundException {
+        TouristEntity tourist = checkTouristCorrectness(id);
+
+        return ResponseEntity.status(HttpStatus.OK).body(new SingleTouristResponseDto(Response.MessageType.INFO,
+                "Current list of users", tourist));
+    }
+
     @PutMapping("/{id}" + "/flight/add")
     public ResponseEntity addTouristFlight(@PathVariable Long id, @RequestBody TouristEditionDto touristEdit) throws NotFoundException {
         TouristEntity tourist = checkTouristCorrectness(id);
         FlightEntity flight = checkFlightCorrectness(touristEdit.getFlight());
 
-        if (!tourist.getFlightList().contains(flight))
+        //TODO: uwaga na liczbę miejsc
+        if (!tourist.getFlightList().contains(flight)) {
             tourist.getFlightList().add(flight);
-
-//        flight.getTouristList().add(tourist);
+            flight.getTouristList().add(tourist);
+        }
 
         touristRepository.save(tourist);
-//        flightRepository.save(flight);
+        flightRepository.save(flight);
 
         return ResponseEntity.status(HttpStatus.OK).body(new TouristEditionResponseDto(Response.MessageType.INFO,
                 "Tourist has been edited", tourist));
