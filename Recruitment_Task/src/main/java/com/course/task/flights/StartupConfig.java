@@ -32,6 +32,9 @@ public class StartupConfig implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
         LocalDate date = LocalDate.now();
         LocalTime time = LocalTime.now();
+//        DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
+//        LocalDateTime dateTime = formatter.parse();
+
         FlightEntity flight = new FlightEntity(LocalDateTime.of(date, time), LocalDateTime.of(date, time), 255, 134.5, Collections.emptyList());
         List<FlightEntity> flightList = new ArrayList<>();
         flightList.add(flight);
