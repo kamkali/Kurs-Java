@@ -1,10 +1,11 @@
-package com.course.task.flights.models.response;
+package com.course.task.flights.models.response.tourist;
 
+import com.course.task.flights.models.response.Response;
 import com.course.task.flights.tourist.TouristEntity;
 
 import java.util.List;
 
-public class TouristListResponseDto extends Response{
+public class TouristListResponseDto extends Response {
     private List<TouristEntity> tourist;
 
     public TouristListResponseDto(MessageType type, String message, List<TouristEntity> tourist) {

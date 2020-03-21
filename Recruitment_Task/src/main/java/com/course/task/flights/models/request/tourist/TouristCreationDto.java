@@ -1,7 +1,6 @@
-package com.course.task.flights.models.request;
+package com.course.task.flights.models.request.tourist;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class TouristCreationDto {
     private String firstName;

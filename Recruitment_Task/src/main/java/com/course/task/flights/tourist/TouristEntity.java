@@ -2,10 +2,12 @@ package com.course.task.flights.tourist;
 
 import com.course.task.flights.flight.FlightEntity;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 public class TouristEntity {
