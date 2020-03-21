@@ -1,7 +1,16 @@
 package com.course.task.flights.models.request.tourist;
 
-import com.course.task.flights.tourist.TouristEntity;
-
 public class TouristEditionDto {
-    private TouristEntity touristEntity;
+    private Long flight;
+
+    public TouristEditionDto() {
+    }
+
+    public TouristEditionDto(Long flight) {
+        this.flight = flight;
+    }
+
+    public Long getFlight() {
+        return flight;
+    }
 }

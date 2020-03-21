@@ -10,8 +10,11 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Component
@@ -27,14 +30,16 @@ public class StartupConfig implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        FlightEntity flight = new FlightEntity();
+        LocalDate date = LocalDate.now();
+        LocalTime time = LocalTime.now();
+        FlightEntity flight = new FlightEntity(LocalDateTime.of(date, time), LocalDateTime.of(date, time), 255, 134.5, Collections.emptyList());
         List<FlightEntity> flightList = new ArrayList<>();
         flightList.add(flight);
 
         flightRepository.save(flight);
 
         TouristEntity tourist1 = new TouristEntity("Kamil", "Kaliś", "M", "Poland",
-                LocalDate.of(1998, Month.MAY, 7), flightList);
+                LocalDate.of(1998, Month.MAY, 7), Collections.emptyList());
 
         touristRepository.save(tourist1);
     }

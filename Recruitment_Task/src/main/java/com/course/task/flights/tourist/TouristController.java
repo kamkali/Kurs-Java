@@ -1,6 +1,7 @@
 package com.course.task.flights.tourist;
 
 import com.course.task.flights.flight.FlightEntity;
+import com.course.task.flights.flight.FlightRepository;
 import com.course.task.flights.models.request.tourist.TouristCreationDto;
 import com.course.task.flights.models.request.tourist.TouristEditionDto;
 import com.course.task.flights.models.response.Response;
@@ -21,11 +22,13 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/tourists")
 public class TouristController {
-    TouristRepository touristRepository;
+    private TouristRepository touristRepository;
+    private FlightRepository flightRepository;
 
     @Autowired
-    public TouristController(TouristRepository touristRepository) {
+    public TouristController(TouristRepository touristRepository, FlightRepository flightRepository) {
         this.touristRepository = touristRepository;
+        this.flightRepository = flightRepository;
     }
 
     @PostMapping("/add")
@@ -48,9 +51,31 @@ public class TouristController {
                 "Current list of users", touristList));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity editTourist(@PathVariable Long id, @RequestBody TouristEditionDto touristEdit) throws NotFoundException {
+    @PutMapping("/{id}" + "/flight/add")
+    public ResponseEntity addTouristFlight(@PathVariable Long id, @RequestBody TouristEditionDto touristEdit) throws NotFoundException {
         TouristEntity tourist = checkTouristCorrectness(id);
+        FlightEntity flight = checkFlightCorrectness(touristEdit.getFlight());
+
+        if (!tourist.getFlightList().contains(flight))
+            tourist.getFlightList().add(flight);
+
+//        flight.getTouristList().add(tourist);
+
+        touristRepository.save(tourist);
+//        flightRepository.save(flight);
+
+        return ResponseEntity.status(HttpStatus.OK).body(new TouristEditionResponseDto(Response.MessageType.INFO,
+                "Tourist has been edited", tourist));
+    }
+
+    @PutMapping("/{id}" + "/flight/remove")
+    public ResponseEntity removeTouristFlight(@PathVariable Long id, @RequestBody TouristEditionDto touristEdit) throws NotFoundException {
+        TouristEntity tourist = checkTouristCorrectness(id);
+        FlightEntity flight = checkFlightCorrectness(touristEdit.getFlight());
+
+        tourist.getFlightList().remove(flight);
+
+        touristRepository.save(tourist);
 
         return ResponseEntity.status(HttpStatus.OK).body(new TouristEditionResponseDto(Response.MessageType.INFO,
                 "Tourist has been edited", tourist));
@@ -65,6 +90,16 @@ public class TouristController {
         return ResponseEntity.status(HttpStatus.OK).body(new TouristDeletionResponseDto(
                 Response.MessageType.INFO, "Tourist has been deleted"));
     }
+
+    private FlightEntity checkFlightCorrectness(Long flightId) throws NotFoundException {
+        Optional<FlightEntity> flight = flightRepository.findById(flightId);
+
+        if (!flight.isPresent())
+            throw new NotFoundException("Flight has not been found");
+
+        return flight.get();
+    }
+
 
     private TouristEntity checkTouristCorrectness(Long id) throws NotFoundException {
         Optional<TouristEntity> tourist = touristRepository.findById(id);
