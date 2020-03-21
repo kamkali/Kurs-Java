@@ -1,5 +1,6 @@
 package com.course.task.flights.tourist;
 
+import com.course.task.flights.exception.NotEnoughSeats;
 import com.course.task.flights.flight.FlightEntity;
 import com.course.task.flights.flight.FlightRepository;
 import com.course.task.flights.models.request.tourist.TouristCreationDto;
@@ -53,15 +54,16 @@ public class TouristController {
         TouristEntity tourist = checkTouristCorrectness(id);
 
         return ResponseEntity.status(HttpStatus.OK).body(new SingleTouristResponseDto(Response.MessageType.INFO,
-                "Current list of users", tourist));
+                "User with given id found", tourist));
     }
 
     @PutMapping("/{id}" + "/flight/add")
-    public ResponseEntity addTouristFlight(@PathVariable Long id, @RequestBody TouristEditionDto touristEdit) throws NotFoundException {
+    public ResponseEntity addTouristFlight(@PathVariable Long id, @RequestBody TouristEditionDto touristEdit) throws NotFoundException, NotEnoughSeats {
         TouristEntity tourist = checkTouristCorrectness(id);
         FlightEntity flight = checkFlightCorrectness(touristEdit.getFlight());
 
-        //TODO: uwaga na liczbę miejsc
+        checkSeatCapacity(flight);
+
         if (!tourist.getFlightList().contains(flight)) {
             tourist.getFlightList().add(flight);
             flight.getTouristList().add(tourist);
@@ -95,6 +97,11 @@ public class TouristController {
 
         return ResponseEntity.status(HttpStatus.OK).body(new TouristDeletionResponseDto(
                 Response.MessageType.INFO, "Tourist has been deleted"));
+    }
+
+    private void checkSeatCapacity(FlightEntity flight) throws NotEnoughSeats {
+        if (flight.getTouristList().size() >= flight.getSeatCapacity())
+            throw new NotEnoughSeats("There is not enough seats in the flight");
     }
 
     private FlightEntity checkFlightCorrectness(Long flightId) throws NotFoundException {

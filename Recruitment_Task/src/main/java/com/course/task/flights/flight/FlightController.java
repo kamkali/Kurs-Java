@@ -39,7 +39,7 @@ public class FlightController {
         FlightEntity flight = checkFlightCorrectness(id);
 
         return ResponseEntity.status(HttpStatus.OK).body(
-                new SingleFlightResponseDto(Response.MessageType.INFO, "List of flights shown", flight));
+                new SingleFlightResponseDto(Response.MessageType.INFO, "Flight of given id found", flight));
     }
 
     @PostMapping("/add")

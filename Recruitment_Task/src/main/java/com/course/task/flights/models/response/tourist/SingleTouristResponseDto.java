@@ -9,4 +9,8 @@ public class SingleTouristResponseDto extends Response{
         super(info, current_list_of_users);
         this.touristEntity = tourist;
     }
+
+    public TouristEntity getTouristEntity() {
+        return touristEntity;
+    }
 }

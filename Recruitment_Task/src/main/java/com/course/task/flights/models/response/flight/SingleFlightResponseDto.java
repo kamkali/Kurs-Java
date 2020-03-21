@@ -9,4 +9,8 @@ public class SingleFlightResponseDto extends Response{
         super(info, list_of_flights_shown);
         this.flightEntity = flight;
     }
+
+    public FlightEntity getFlightEntity() {
+        return flightEntity;
+    }
 }
