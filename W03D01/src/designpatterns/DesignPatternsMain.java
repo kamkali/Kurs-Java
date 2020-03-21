@@ -69,6 +69,9 @@ public class DesignPatternsMain {
     }
 
     private static void builderExample() {
+        KebabNested kebabNestedBuilder = new KebabNested.Builder()
+                .setBun(KebabNested.Bun.BREAD_BUN).build();
+
         KebabBuilder builder = new KebabBuilder();
 
         builder.setBun(Builder.Bun.BREAD_BUN);
